@@ -30,8 +30,7 @@ const onSeachFormSubmit = evt => {
     return
   }
 
-loaderEl.classList.remove('is-hidden');
-
+  loaderEl.classList.remove('is-hidden');
 
   fetchPhotosByQuery(searchQuary)
     .then(data => {
