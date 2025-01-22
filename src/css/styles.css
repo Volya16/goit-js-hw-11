@@ -12,11 +12,11 @@
 @import url('./container.css');
 
 /* Sections style */
-/* @import url('./header.css'); */
+@import url('./header.css');
 /* @import url('./index.css'); */
 /* @import url('./badges.css'); */
 /* @import url('./back-link.css'); */
-/* @import url('./footer.css'); */
+@import url('./footer.css');
 
 
 .header {
