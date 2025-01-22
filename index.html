@@ -6,22 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homework number 11</title>
     <script type="module" crossorigin src="/vanilla-app-template/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/vanilla-app-template/assets/vendor-I1I71QQ2.js">
-    <link rel="stylesheet" crossorigin href="/vanilla-app-template/assets/vendor-DnveWo0P.css">
-    <link rel="stylesheet" crossorigin href="/vanilla-app-template/assets/index-DvPDDfy5.css">
+    <link rel="modulepreload" crossorigin href="/vanilla-app-template/assets/vendor-B07T6_gy.js">
+    <link rel="stylesheet" crossorigin href="/vanilla-app-template/assets/index-SgC_nqa2.css">
   </head>
   <body>
     <header class="header">
-      <h1 class="title">Homework number 11</h1>
+      <h1 class="page-title">Search photos</h1>
     </header>
     <section class="gallery-section">
       <div class="container">
-        <form class="seach-form js-seach-form">
-          <input type="text" class="form-input" name="user_query" placeholder="Search images...">
-          <button class="seach-btn" type="submit">Search</button>
+        <form class="search-form js-seach-form">
+          <input type="text" class="form-input" name="user_query"  placeholder="Search images..." autocomplete="off" autofocus>
+          <button class="search-btn" type="submit">Search</button>
         </form>
         <ul class="gallery js-gallery">
         </ul>
+      </div>
+      <div class="loader-container container is-hidden">
+        <span class="loader"></span>
       </div>
     </section>
   </body>
