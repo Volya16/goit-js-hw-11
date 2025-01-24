@@ -1,8 +1,6 @@
 import iziToast from 'izitoast';
 import SimpleLightbox from "simplelightbox";
 
-
-
 import { createGalleryCardTemplate } from './js/render-functions';
 import { fetchPhotosByQuery } from './js/pixabay-api';
 
@@ -10,6 +8,13 @@ import { fetchPhotosByQuery } from './js/pixabay-api';
 const seachFormEl = document.querySelector('.js-seach-form');
 const galleryEl = document.querySelector('.js-gallery');
 const loaderEl = document.querySelector('.loader-container');
+
+iziToast.settings({
+  position: 'topRight',
+  theme: 'dark',
+  backgroundColor: '#ef4040',
+  timeout: 2000,
+});
 
 
 const lightbox = new SimpleLightbox('.js-gallery a', {
@@ -25,14 +30,17 @@ const onSeachFormSubmit = evt => {
   const searchQuary = evt.currentTarget.elements.user_query.value.trim();
 
   if (searchQuary === '') {
+    loaderSwitcher(false);
     iziToast.error({
       message: 'Please feel this field!',
-      position: 'topRight',
     });
-    return
+    seachFormEl.reset();
+    loaderSwitcher(true);
+    return;
   }
 
-  loaderEl.classList.remove('is-hidden');
+  galleryVisibly(true);
+  loaderSwitcher(false);
 
   fetchPhotosByQuery(searchQuary)
     .then(data => {
@@ -40,9 +48,6 @@ const onSeachFormSubmit = evt => {
         iziToast.error({
           message:
             'Sorry, there are no images matching your search query. Please try again!',
-          position: 'topRight',
-          theme: 'dark', 
-          backgroundColor: '#ef4040',
         });
         galleryEl.innerHTML = '';
         seachFormEl.reset();
@@ -51,19 +56,38 @@ const onSeachFormSubmit = evt => {
       const galleryTemplate = data.hits
         .map(imgs => createGalleryCardTemplate(imgs))
         .join('');
-      loaderEl.classList.remove('is-hidden');
       galleryEl.innerHTML = galleryTemplate;
-
       lightbox.refresh();
+      galleryVisibly(true);
     })
     .catch(err => {
       console.log(err);
     })
     .finally(() => {
-      loaderEl.classList.add('is-hidden');
-      seachFormEl.reset()
+      seachFormEl.reset();
+      loaderSwitcher(true);
     }
   )
+  galleryVisibly(false);
 };
 
 seachFormEl.addEventListener('submit', onSeachFormSubmit);
+
+
+function loaderSwitcher(boolean) {
+  if (boolean) {
+    setTimeout(() => {
+      loaderEl.classList.add('is-hidden');
+    }, 300);
+  } else {
+    loaderEl.classList.remove('is-hidden');
+  }
+}
+
+function galleryVisibly(boolean) {
+  if (boolean) {
+    galleryEl.classList.remove('is-visibly');
+  } else {
+    galleryEl.classList.add('is-visibly');
+  }
+}

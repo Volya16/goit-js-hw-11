@@ -92,6 +92,11 @@
   gap: 24px;
 }
 
+.gallery.is-visibly {
+  display: none;
+  /* opacity: 0; */
+}
+
 .gallery-card {
   border: 1px solid #808080;
   display: flex;
