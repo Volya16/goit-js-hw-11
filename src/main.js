@@ -66,7 +66,4 @@ const onSeachFormSubmit = evt => {
   )
 };
 
-
-
-
 seachFormEl.addEventListener('submit', onSeachFormSubmit);
