@@ -31,9 +31,11 @@ const onSeachFormSubmit = evt => {
 
   if (searchQuary === '') {
     loaderSwitcher(false);
-    iziToast.error({
-      message: 'Please feel this field!',
-    });
+    setTimeout(() => {
+      iziToast.error({
+        message: 'Please feel this field!',
+      });
+    }, 500)
     seachFormEl.reset();
     loaderSwitcher(true);
     return;
@@ -78,7 +80,7 @@ function loaderSwitcher(boolean) {
   if (boolean) {
     setTimeout(() => {
       loaderEl.classList.add('is-hidden');
-    }, 300);
+    }, 500);
   } else {
     loaderEl.classList.remove('is-hidden');
   }
